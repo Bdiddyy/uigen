@@ -16,10 +16,10 @@ test("MessageList shows empty state when no messages", () => {
   render(<MessageList messages={[]} />);
 
   expect(
-    screen.getByText("Start a conversation to generate React components")
+    screen.getByText("Generate React components")
   ).toBeDefined();
   expect(
-    screen.getByText("I can help you create buttons, forms, cards, and more")
+    screen.getByText("Describe a component and I'll build it with live preview")
   ).toBeDefined();
 });
 
@@ -183,7 +183,7 @@ test("MessageList renders multiple messages in correct order", () => {
   const { container } = render(<MessageList messages={messages} />);
 
   // Get all message containers in order
-  const messageContainers = container.querySelectorAll(".rounded-xl");
+  const messageContainers = container.querySelectorAll(".rounded-2xl");
 
   // Verify we have 4 messages
   expect(messageContainers).toHaveLength(4);
@@ -218,7 +218,7 @@ test("MessageList handles step-start parts", () => {
   expect(screen.getByText("Step 1 content")).toBeDefined();
   expect(screen.getByText("Step 2 content")).toBeDefined();
   // Check that a separator exists (hr element)
-  const container = screen.getByText("Step 1 content").closest(".rounded-xl");
+  const container = screen.getByText("Step 1 content").closest(".rounded-2xl");
   expect(container?.querySelector("hr")).toBeDefined();
 });
 
@@ -238,10 +238,10 @@ test("MessageList applies correct styling for user vs assistant messages", () =>
 
   render(<MessageList messages={messages} />);
 
-  const userMessage = screen.getByText("User message").closest(".rounded-xl");
+  const userMessage = screen.getByText("User message").closest(".rounded-2xl");
   const assistantMessage = screen
     .getByText("Assistant message")
-    .closest(".rounded-xl");
+    .closest(".rounded-2xl");
 
   // User messages should have blue background
   expect(userMessage?.className).toContain("bg-blue-600");
@@ -282,7 +282,7 @@ test("MessageList shows loading for assistant message with empty parts", () => {
   );
 
   // Check that exactly one "Generating..." text appears
-  const loadingText = container.querySelectorAll(".text-neutral-500");
+  const loadingText = container.querySelectorAll(".text-neutral-400");
   const generatingElements = Array.from(loadingText).filter(
     (el) => el.textContent === "Generating..."
   );
